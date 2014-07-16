@@ -201,8 +201,6 @@
 		BB0C495E190910E70015152C /* playerv002.obj in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FA190910E60015152C /* playerv002.obj */; };
 		BB0C495F190910E70015152C /* score_right_top.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FB190910E60015152C /* score_right_top.png */; };
 		BB0C4960190910E70015152C /* score_right_top.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FB190910E60015152C /* score_right_top.png */; };
-		BB0C4961190910E70015152C /* Star Chaser (2012).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FC190910E60015152C /* Star Chaser (2012).mp3 */; };
-		BB0C4962190910E70015152C /* Star Chaser (2012).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FC190910E60015152C /* Star Chaser (2012).mp3 */; };
 		BB0C4963190910E70015152C /* Star_Chaser.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FD190910E60015152C /* Star_Chaser.mp3 */; };
 		BB0C4964190910E70015152C /* Star_Chaser.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FD190910E60015152C /* Star_Chaser.mp3 */; };
 		BB0C4965190910E70015152C /* streak.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0C48FE190910E60015152C /* streak.png */; };
@@ -510,7 +508,6 @@
 		BB0C48F9190910E60015152C /* playerv002_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerv002_256.png; sourceTree = "<group>"; };
 		BB0C48FA190910E60015152C /* playerv002.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playerv002.obj; sourceTree = "<group>"; };
 		BB0C48FB190910E60015152C /* score_right_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score_right_top.png; sourceTree = "<group>"; };
-		BB0C48FC190910E60015152C /* Star Chaser (2012).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Star Chaser (2012).mp3"; sourceTree = "<group>"; };
 		BB0C48FD190910E60015152C /* Star_Chaser.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Star_Chaser.mp3; sourceTree = "<group>"; };
 		BB0C48FE190910E60015152C /* streak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak.png; sourceTree = "<group>"; };
 		BB0C48FF190910E60015152C /* toonSmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = toonSmoke.plist; sourceTree = "<group>"; };
@@ -805,7 +802,6 @@
 				BB0C48F9190910E60015152C /* playerv002_256.png */,
 				BB0C48FA190910E60015152C /* playerv002.obj */,
 				BB0C48FB190910E60015152C /* score_right_top.png */,
-				BB0C48FC190910E60015152C /* Star Chaser (2012).mp3 */,
 				BB0C48FD190910E60015152C /* Star_Chaser.mp3 */,
 				BB0C48FE190910E60015152C /* streak.png */,
 				BB0C48FF190910E60015152C /* toonSmoke.plist */,
@@ -1071,7 +1067,6 @@
 				AC14CEC91935BE390064D545 /* b2.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				AC14CED11935BE5F0064D545 /* CloseSelected.png in Resources */,
-				BB0C4961190910E70015152C /* Star Chaser (2012).mp3 in Resources */,
 				BB0C4901190910E70015152C /* boom.mp3 in Resources */,
 				BB0C4949190910E70015152C /* menuEmission.plist in Resources */,
 				BB0C495D190910E70015152C /* playerv002.obj in Resources */,
@@ -1133,7 +1128,6 @@
 				BB0C4946190910E70015152C /* menu_scene.plist in Resources */,
 				BB0C4912190910E70015152C /* credits_03.png in Resources */,
 				BB0C491A190910E70015152C /* diji1_v001.obj in Resources */,
-				BB0C4962190910E70015152C /* Star Chaser (2012).mp3 in Resources */,
 				BB0C4918190910E70015152C /* debris.plist in Resources */,
 				BB0C4966190910E70015152C /* streak.png in Resources */,
 				BB0C4904190910E70015152C /* boom2.mp3 in Resources */,
