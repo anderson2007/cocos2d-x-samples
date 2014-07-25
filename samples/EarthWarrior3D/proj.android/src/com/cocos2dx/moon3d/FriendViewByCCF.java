@@ -1,4 +1,4 @@
-package org.cocos2dx.cpp;
+package com.cocos2dx.moon3d;
 
 import com.cocos2dx.moon3d.R;
 import com.cocobox.library.floatwindow.JoyFloatInterface;
