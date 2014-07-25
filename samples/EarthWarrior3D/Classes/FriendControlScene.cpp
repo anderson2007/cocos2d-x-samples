@@ -112,7 +112,7 @@ void FriendControl::menuCloseCallback(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "remoteDisconnectJni", "()V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "remoteDisconnectJni", "()V")) {
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
         t.env->DeleteLocalRef(t.classID);
@@ -131,7 +131,7 @@ void FriendControl::menuLeftCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
         jstring stringArg1 = t.env->NewStringUTF("1");
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
@@ -146,7 +146,7 @@ void FriendControl::menuRightCallback(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
         jstring stringArg1 = t.env->NewStringUTF("2");
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
@@ -161,7 +161,7 @@ void FriendControl::menuAddCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
         jstring stringArg1 = t.env->NewStringUTF("3");
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);

@@ -35,7 +35,7 @@
                  android:icon="@drawable/icon">
 
 
-        <activity android:name="org.cocos2dx.cpp.AppActivity"
+        <activity android:name="com.cocos2dx.moon3d.AppActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -52,7 +52,7 @@
         </activity>       
 
         <service
-            android:name="org.cocos2dx.cpp.ApplicationService"
+            android:name="com.cocos2dx.moon3d.ApplicationService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="org.cocos2dx.cpp.ApplicationService" />

@@ -116,7 +116,7 @@ void GameOverLayer::menu_backtomenu()
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "remoteDisconnectJni", "()V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "remoteDisconnectJni", "()V")) {
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
         t.env->DeleteLocalRef(t.classID);

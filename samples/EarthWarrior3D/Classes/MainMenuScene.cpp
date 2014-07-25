@@ -175,7 +175,7 @@ void MainMenuScene::pkgame_callback()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "showFriend", "(Ljava/lang/String;)V")) {
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "showFriend", "(Ljava/lang/String;)V")) {
         jstring stringArg1 = t.env->NewStringUTF("");
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);

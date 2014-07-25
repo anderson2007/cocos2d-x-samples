@@ -21,7 +21,7 @@ void cocos_android_app_init (JNIEnv* env, jobject thiz) {
 }
 
 extern "C" {
-	void Java_org_cocos2dx_cpp_AppActivity_SendGift(JNIEnv* env, jobject thiz, jstring type, jstring count){
+	void Java_com_cocos2dx_moon3d_AppActivity_SendGift(JNIEnv* env, jobject thiz, jstring type, jstring count){
 		const char *sType = env->GetStringUTFChars(type, NULL);
 		const char *sCount = env->GetStringUTFChars(count, NULL);
 		
@@ -38,7 +38,7 @@ extern "C" {
 		env->ReleaseStringUTFChars(count, sCount);
 	}
 	
-	void Java_org_cocos2dx_cpp_AppActivity_StartGame(JNIEnv* env, jobject thiz, jstring something){
+	void Java_com_cocos2dx_moon3d_AppActivity_StartGame(JNIEnv* env, jobject thiz, jstring something){
 		const char *sTemp = env->GetStringUTFChars(something, NULL);
 		
 		LOGD("Java_org_cocos2dx_cpp_AppActivity_StartGame something:%s", sTemp);
@@ -53,7 +53,7 @@ extern "C" {
 		env->ReleaseStringUTFChars(something, sTemp);
 	}	
 	
-	void Java_org_cocos2dx_cpp_AppActivity_StartControl(JNIEnv* env, jobject thiz){
+	void Java_com_cocos2dx_moon3d_AppActivity_StartControl(JNIEnv* env, jobject thiz){
 		
 		LOGD("Java_org_cocos2dx_cpp_AppActivity_StartGame something:");
 		
@@ -65,7 +65,7 @@ extern "C" {
         }
    	}		
    	
-	void Java_org_cocos2dx_cpp_AppActivity_ReturnMainMenu(JNIEnv* env, jobject thiz){
+	void Java_com_cocos2dx_moon3d_AppActivity_ReturnMainMenu(JNIEnv* env, jobject thiz){
 		
 		LOGD("Java_org_cocos2dx_cpp_AppActivity_ReturnMainMenu");
 		

@@ -41,7 +41,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.cocos2dx.cpp.ApplicationService;
+import com.cocos2dx.moon3d.ApplicationService;
 import com.cocos2dx.moon3d.R;
 import com.intel.csdk.wrapper.Peer;
 
