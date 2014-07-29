@@ -40,7 +40,7 @@ public:
     virtual void die();
     void hideWarningLayer();
     
-    void touchMoved(Point delta);
+    void touchMoved(Point prev, Point delta);
 protected:
     float targetAngle = 0;
     Point targetPos = Point(0,0);

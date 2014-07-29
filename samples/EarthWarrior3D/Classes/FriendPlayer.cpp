@@ -55,7 +55,7 @@ void FriendPlayer::update(float dt)
     targetAngle = getRotation3D().y;
 }
 
-void FriendPlayer::touchMoved(Point delta)
+void FriendPlayer::touchMoved(Point prev, Point delta)
 {
     _prev = getPosition();
     _delta = delta;
