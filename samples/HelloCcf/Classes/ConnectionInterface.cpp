@@ -15,11 +15,16 @@
 USING_NS_CC;
 
 std::list<tagPEER> ConnectionInterface::_listPeer;
+std::list<std::string> ConnectionInterface::_listMessage;
 std::mutex ConnectionInterface::_mutex;
+std::mutex ConnectionInterface::_mutexMessage;
+
 bool ConnectionInterface::_bConnect = false;
 
 void ConnectionInterface::OnPeerUpdate(tagPEER peer)
 {
+    CCLOG("ConnectionInterface::OnPeerUpdate");
+    
     std::list<tagPEER>::iterator iter;
     iter = queryPeer(peer);
     
@@ -73,9 +78,9 @@ void ConnectionInterface::InvitePeer(tagPEER peer)
 #endif
 }
 
-void ConnectionInterface::ReciveInvite(std::string sessionId)
+void ConnectionInterface::OnReciveInvite(std::string sessionId)
 {
-    CCLOG("ReciveInvite");
+    CCLOG("ConnectionInterface::OnReciveInvite");
     cocos2d::EventCustom event("IntelCCFPeerInvite");
     cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
@@ -93,15 +98,25 @@ void ConnectionInterface::SendMessage(std::string msg)
 #endif
 }
 
-void ConnectionInterface::ReceiveMessage(std::string message)
+void ConnectionInterface::OnReceiveMessage(std::string message)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    CCLOG("receive msg:%s", message.c_str());
-#endif
+    CCLOG("OnReceiveMessage %s", message.c_str());
+    if(message.length() == 0) return;
+        
+    _mutexMessage.lock();
+    _listMessage.push_front(message);
+    _mutexMessage.unlock();
+    
+    cocos2d::EventCustom event("IntelCCFReceiveMessage");
+    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
 void ConnectionInterface::Disconnect()
 {
+    _mutexMessage.lock();
+    _listMessage.clear();
+    _mutexMessage.unlock();
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/helloccf/AppActivity", "remoteDisconnectJni", "()V")) {
@@ -111,7 +126,18 @@ void ConnectionInterface::Disconnect()
 #endif
 }
 
-void ConnectionInterface::sendInviteResponse(bool value)
+void ConnectionInterface::OnDisconnect()
+{
+    _mutexMessage.lock();
+    _listMessage.clear();
+    _mutexMessage.unlock();
+    
+    CCLOG("OnDisconnect");
+    cocos2d::EventCustom event("IntelCCFDisconnect");
+    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+}
+
+void ConnectionInterface::SendInviteResponse(bool value)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
@@ -122,6 +148,30 @@ void ConnectionInterface::sendInviteResponse(bool value)
     
     _bConnect = value;
 #endif
+}
+
+void ConnectionInterface::OnAcknowledgment()
+{
+    CCLOG("OnAcknowledgment");
+    cocos2d::EventCustom event("IntelCCFInviteAcknowledgment");
+    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+}
+
+void ConnectionInterface::getPeerList(std::list<tagPEER> &listPeer)
+{
+    _mutex.lock();
+    listPeer = std::list<tagPEER>(_listPeer);
+    CCLOG("getPeerList %d", listPeer.size());
+    _mutex.unlock();
+}
+
+void ConnectionInterface::getMessageList(std::list<std::string> &listMessage)
+{
+    _mutexMessage.lock();
+    listMessage = std::list<std::string>(_listMessage);
+    CCLOG("getMessageList %d", listMessage.size());
+    _listMessage.clear();
+    _mutexMessage.unlock();
 }
 
 std::list<tagPEER>::iterator ConnectionInterface::queryPeer(tagPEER &peer)

@@ -29,7 +29,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Plane.cpp \
                    ../../Classes/LicenseLayer.cpp \
                    ../../Classes/FriendControlScene.cpp \
-                   ../../Classes/Reward.cpp
+                   ../../Classes/Reward.cpp \
+                   ../../Classes/FriendPlayer.cpp \
+                   
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

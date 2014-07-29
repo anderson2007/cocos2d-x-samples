@@ -74,7 +74,7 @@ public class AppActivity extends Cocos2dxActivity implements P2PEventListener {
 	public static AppActivity sAppActivity = null;
 	private Dialog inviteDialog	= null;
 	
-    private static native void SendGift(String type, String count);
+    private static native void SendGift(String type);
 
     private static native void StartGame(String something);
     
@@ -363,7 +363,7 @@ public class AppActivity extends Cocos2dxActivity implements P2PEventListener {
 
 	@Override
 	public void P2PMessageUpdate(String msg) {
-		SendGift(msg, "1");
+		SendGift(msg);
 	}
 
 	@Override

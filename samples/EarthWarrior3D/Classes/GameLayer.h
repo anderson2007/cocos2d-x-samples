@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 class Player;
+class FriendPlayer;
 //class QuadTree;
 class AirCraft;
 class GameEntity;
@@ -25,16 +26,18 @@ public:
     
     //virtual void onEnter();
     
-    void addNodeSync(const char* type, const char* count);
+    void addNodeAsync(const char* type);
 protected:
     float xScroll = 0.0f;
     float speed = -60.0f;
     Sprite *_spr;
     Sprite *_cloud;
     Player *_player;
+    FriendPlayer *_friendPlayer;
     MotionStreak *_streak;
     ParticleSystemQuad *_emissionPart;
     void schedulePlayer();
+    void scheduleFriendPlayer();
     //QuadTree *_collisionTree;
     
 

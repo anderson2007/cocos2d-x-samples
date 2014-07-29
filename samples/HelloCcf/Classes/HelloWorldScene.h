@@ -25,6 +25,12 @@ protected:
     void listenToPeerUpdate(cocos2d::EventCustom *event);
 
     void listenToPeerInvite(cocos2d::EventCustom *event);
+
+    void listenToAcknowledgment(cocos2d::EventCustom *event);
+    
+    void schedulePeer(float dt);
+
+    void scheduleAcknowledgement(float dt);
     
     void schedulePop(float dt);
 

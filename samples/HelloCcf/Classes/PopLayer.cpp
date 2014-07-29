@@ -8,6 +8,7 @@
 
 #include "PopLayer.h"
 #include "ConnectionInterface.h"
+#include "ChatScene.h"
 
 Scene * PopLayer::scene()
 {
@@ -62,13 +63,16 @@ bool PopLayer::init()
 void PopLayer::yesButton(Ref *pSender)
 {
 	this->removeFromParentAndCleanup(true);
-    ConnectionInterface::sendInviteResponse(true);
+    ConnectionInterface::SendInviteResponse(true);
+    
+    auto scene = ChatLayer::createScene();
+    Director::getInstance()->replaceScene(scene);
 }
 
 void PopLayer::noButton(Ref *pSender)
 {
 	this->removeFromParentAndCleanup(true);
-    ConnectionInterface::sendInviteResponse(false);
+    ConnectionInterface::SendInviteResponse(false);
 }
 
 void PopLayer::setTitle()

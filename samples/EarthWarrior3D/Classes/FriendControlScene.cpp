@@ -1,5 +1,7 @@
 #include "MainMenuScene.h"
 #include "FriendControlScene.h"
+#include "FriendPlayer.h"
+#include "ParticleManager.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/android/jni/JniHelper.h"
 #endif
@@ -93,7 +95,7 @@ bool FriendControl::init()
 
     // add the label as a child to this layer
     this->addChild(label, 1);
-
+/*
     // add "FriendControl" splash screen"
     auto sprite = Sprite::create("potion2.png");
 
@@ -103,7 +105,27 @@ bool FriendControl::init()
     sprite->setScale(2, 2);
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
+*/
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
     
+    listener->onTouchBegan = CC_CALLBACK_2(FriendControl::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(FriendControl::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(FriendControl::onTouchEnded, this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+    _friendPlayer = Sprite3D::create("playerv002.obj", "playerv002_256.png");
+    if(_friendPlayer)
+    {
+        _friendPlayer->setScale(8);
+        addChild(_friendPlayer);
+        _friendPlayer->setPosition(Point(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+        _friendPlayer->setRotation3D(Vertex3F(90,0,0));
+
+        static_cast<Sprite3D*>(_friendPlayer)->setOutline(0.2, Color3B(0,0,0));
+    }
+        
     return true;
 }
 
@@ -132,8 +154,7 @@ void FriendControl::menuLeftCallback(Ref* pSender)
     
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
-        jstring stringArg1 = t.env->NewStringUTF("1");
-        
+        jstring stringArg1 = t.env->NewStringUTF("{\"type\":1}");
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
         t.env->DeleteLocalRef(t.classID);
         t.env->DeleteLocalRef(stringArg1);
@@ -147,8 +168,7 @@ void FriendControl::menuRightCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
-        jstring stringArg1 = t.env->NewStringUTF("2");
-        
+        jstring stringArg1 = t.env->NewStringUTF("{\"type\":2}");
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
         t.env->DeleteLocalRef(t.classID);
         t.env->DeleteLocalRef(stringArg1);
@@ -162,8 +182,7 @@ void FriendControl::menuAddCallback(Ref* pSender)
     
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
-        jstring stringArg1 = t.env->NewStringUTF("3");
-        
+        jstring stringArg1 = t.env->NewStringUTF("{\"type\":3}");
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
         t.env->DeleteLocalRef(t.classID);
         t.env->DeleteLocalRef(stringArg1);
@@ -181,4 +200,36 @@ void FriendControl::jniReturnMainMenu()
 void FriendControl::scheduleReturnMainMenu(float dt)
 {
     Director::getInstance()->replaceScene(MainMenuScene::createScene());
+}
+
+bool FriendControl::onTouchBegan(Touch *touch, Event *event)
+{
+    
+    return true;
+}
+
+void FriendControl::onTouchMoved(Touch *touch, Event *event)
+{
+//    Point prev = event->getCurrentTarget()->getPosition();
+//    Point delta =touch->getDelta();
+    
+    Point prev = _friendPlayer->getPosition();
+    Point delta =touch->getDelta();
+    _friendPlayer->setPosition(prev+delta);
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    JniMethodInfo t;
+    
+    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
+        jstring stringArg1 = t.env->NewStringUTF(StringUtils::format("{\"type\":4, \"prevX\":%f, \"prevX\":%f, \"deltaX\":%f, \"deltaY\":%f}", prev.x, prev.y, delta.x, delta.y).c_str());
+        
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
+        t.env->DeleteLocalRef(t.classID);
+        t.env->DeleteLocalRef(stringArg1);
+    }
+#endif
+}
+
+void FriendControl::onTouchEnded(Touch *touch, Event *event)
+{
 }

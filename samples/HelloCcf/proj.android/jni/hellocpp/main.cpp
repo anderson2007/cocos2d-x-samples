@@ -75,15 +75,25 @@ extern "C" {
 	void Java_com_intel_csdk_wrapper_JNIMediator_nativeInvite(JNIEnv* env, jobject thiz, jstring peerID){
 		const char *cId = env->GetStringUTFChars(peerID, NULL);
 		LOGD("Java_com_intel_csdk_wrapper_JNIMediator_nativeInvite sessionName:%s", cId);
-	    ConnectionInterface::ReciveInvite(cId);
+	    ConnectionInterface::OnReciveInvite(cId);
 		env->ReleaseStringUTFChars(peerID, cId);
 	}
 
 	void Java_com_intel_csdk_wrapper_JNIMediator_nativeReceiveMsg(JNIEnv* env, jobject thiz, jstring msg){
 		const char *cMsg = env->GetStringUTFChars(msg, NULL);
 		LOGD("Java_com_intel_csdk_wrapper_JNIMediator_nativeReceiveMsg :%s", cMsg);
-	    ConnectionInterface::ReceiveMessage(cMsg);
+	    ConnectionInterface::OnReceiveMessage(cMsg);
 		env->ReleaseStringUTFChars(msg, cMsg);
 
+	}
+
+	void Java_com_intel_csdk_wrapper_JNIMediator_nativeInviteAcknowledgment(JNIEnv* env, jobject thiz){
+		LOGD("Java_com_intel_csdk_wrapper_JNIMediator_nativeInviteAcknowledgment");
+		ConnectionInterface::OnAcknowledgment();
+	}
+
+	void Java_com_intel_csdk_wrapper_JNIMediator_nativeDisconnect(JNIEnv* env, jobject thiz){
+		LOGD("Java_com_intel_csdk_wrapper_JNIMediator_nativeDisconnect");
+		ConnectionInterface::OnDisconnect();
 	}
 }

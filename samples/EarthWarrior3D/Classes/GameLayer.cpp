@@ -8,6 +8,7 @@
 
 #include "GameLayer.h"
 #include "Player.h"
+#include "FriendPlayer.h"
 #include "Enemies.h"
 #include "Reward.h"
 #include "PublicApi.h"
@@ -19,6 +20,8 @@
 #include "SimpleAudioEngine.h"
 #include "Effects.h"
 #include "ParticleManager.h"
+#include "json/document.h"
+
 USING_NS_CC;
 using namespace std;
 
@@ -26,18 +29,6 @@ bool GameLayer::isDie=false;
 
 bool GameLayer::init()
 {    
-    //************** animation cache ******************
-//    auto animation = Animation::create();
-//    animation->setDelayPerUnit(0.1);
-//    auto texture = Director::getInstance()->getTextureCache()->addImage("player_bullet_explosion.png");
-//    animation->addSpriteFrameWithTexture(texture, Rect(0,0,26,17));
-//    animation->addSpriteFrameWithTexture(texture, Rect(0,18,26,22));
-//    animation->addSpriteFrameWithTexture(texture, Rect(0,40,26,20));
-//    animation->addSpriteFrameWithTexture(texture, Rect(0,61,26,23));
-//
-//    animation->retain();
-//    AnimationCache::getInstance()->addAnimation(animation,"bullet_expl");
-    
     _spr = Sprite::create("groundLevel.jpg");
     addChild(_spr, -5);
     Texture2D::TexParams texRepeat = {GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_REPEAT};
@@ -47,7 +38,6 @@ bool GameLayer::init()
     _spr->setPosition(0.0f,400.0f);
     
     _player = Player::create();
-    
     _streak = MotionStreak::create(0.4, 1, 15, Color3B(82,255,253), "streak.png");
     _player->setTrail(_streak);
     addChild(_streak,3);
@@ -59,9 +49,9 @@ bool GameLayer::init()
     _emissionPart->setPositionType(tPositionType::FREE);
     addChild(_player,5);
     EffectManager::setLayer(this);
-
+    
     this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5, -1, 2.0);
-
+    
     BulletController::init(this);
     EnemyController::init(this);
     RewardController::init(this);
@@ -71,12 +61,36 @@ bool GameLayer::init()
     _player->setPosition(Point(0,-1000));
     _player->runAction(Sequence::create(
                                         DelayTime::create(0.75),
-                       Spawn::create(
-                                     EaseBackOut::create(MoveTo::create(1.7,Point(0,-200))),
-                                     EaseSineOut::create(RotateBy::create(1.7,Vertex3F(0,720,0))),
-                                     nullptr
-                                     ),
-                       CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer,this)),nullptr));
+                                        Spawn::create(
+                                                      EaseBackOut::create(MoveTo::create(1.7,Point(0,-200))),
+                                                      EaseSineOut::create(RotateBy::create(1.7,Vertex3F(0,720,0))),
+                                                      nullptr
+                                                      ),
+                                        CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer,this)),nullptr));
+    
+    
+    _friendPlayer = FriendPlayer::create();
+    MotionStreak *_streak1 = MotionStreak::create(0.4, 1, 15, Color3B(82,255,253), "streak.png");
+    _friendPlayer->setTrail(_streak1);
+    addChild(_streak1,3);
+    auto emission_frame1=SpriteFrameCache::getInstance()->getSpriteFrameByName("engine.jpg");
+    ValueMap vm_emission1=ParticleManager::getInstance()->GetPlistData("emissionPart");
+    ParticleSystemQuad *_emissionPart1 = ParticleSystemQuad::create(vm_emission1,emission_frame1);
+    
+    _friendPlayer->setEmissionPart(_emissionPart1);
+    addChild(_emissionPart1,4);
+    _emissionPart1->setPositionType(tPositionType::FREE);
+    addChild(_friendPlayer,999);
+    
+    _friendPlayer->setPosition(Point(0,-1000));
+    _friendPlayer->runAction(Sequence::create(
+                                        DelayTime::create(0.75),
+                                        Spawn::create(
+                                                      EaseBackOut::create(MoveTo::create(1.7,Point(0,-200))),
+                                                      EaseSineOut::create(RotateBy::create(1.7,Vertex3F(0,720,0))),
+                                                      nullptr
+                                                      ),
+                                        CallFunc::create(CC_CALLBACK_0(GameLayer::scheduleFriendPlayer,this)),nullptr));
     
     return true;
 }
@@ -85,6 +99,14 @@ void GameLayer::schedulePlayer()
 {
     _player->scheduleUpdate();
 }
+
+void GameLayer::scheduleFriendPlayer()
+{
+    if(_friendPlayer == NULL) return;
+
+    _friendPlayer->scheduleUpdate();
+}
+
 void GameLayer::gameMaster(float dt)
 {
     if(isDie)
@@ -93,6 +115,8 @@ void GameLayer::gameMaster(float dt)
     }
     
     _elapsed+=dt;
+    
+    return;
     
     int enemyCount =EnemyController::enemies.size();
     
@@ -223,6 +247,15 @@ void GameLayer::update(float dt)
             stopAllActions();
             unscheduleAllSelectors();
         }
+        
+        if (_friendPlayer) {
+            _friendPlayer->stop();
+
+            removeChild(_friendPlayer->getTrail());
+            removeChild(_friendPlayer->getEmissionPart());
+            removeChild(_friendPlayer);
+            _friendPlayer=NULL;
+        }
     }
 }
 
@@ -249,13 +282,16 @@ void GameLayer::removeBulletAndEnmeys(float dt)
     }
 }
 
-void GameLayer::addNodeSync(const char* type, const char* count)
+void GameLayer::addNodeAsync(const char* type)
 {
     if(isDie) return;
 
-    log("HelloWorld::addNodeSync %s %s", type, count);
-
-    switch (atoi(type)) {
+    log("HelloWorld::addNodeAsync %s", type);
+    
+    rapidjson::Document doc;
+    doc.Parse<rapidjson::kParseDefaultFlags>(type);
+    
+    switch (doc["type"].GetInt()) {
         case 1:
             _player->friendShootLeft();
             break;
@@ -263,8 +299,11 @@ void GameLayer::addNodeSync(const char* type, const char* count)
             _player->friendShootRight();
             break;
         case 3:
-        default:
             this->schedule(schedule_selector(GameLayer::addNode),0,0,0);
+            break;
+        case 4:
+            if(_friendPlayer == NULL) return;
+            _friendPlayer->touchMoved(Point(doc["prevX"].GetDouble(), doc["prevY"].GetDouble()), Point(doc["deltaX"].GetDouble(), doc["deltaY"].GetDouble()));
             break;
     }
 }

@@ -21,21 +21,19 @@ void cocos_android_app_init (JNIEnv* env, jobject thiz) {
 }
 
 extern "C" {
+
 	void Java_com_cocos2dx_moon3d_AppActivity_SendGift(JNIEnv* env, jobject thiz, jstring type, jstring count){
 		const char *sType = env->GetStringUTFChars(type, NULL);
-		const char *sCount = env->GetStringUTFChars(count, NULL);
-		
-		LOGD("Java_org_cocos2dx_cpp_AppActivity_SessionUpdate type:%s count:%s", sType, sCount);
+		LOGD("Java_com_cocos2dx_moon3d_AppActivity_SendGift type:%s", sType);
 		
 		HelloWorld *pScene = (HelloWorld *)Director::getInstance()->getRunningScene();
     if(pScene && pScene->getChildByTag(100) && pScene->getChildByTag(100)->getChildByTag(123))
     {
         GameLayer *pLayer = (GameLayer *)pScene->getChildByTag(100)->getChildByTag(123);
-				pLayer->addNodeSync(sType, sCount);            
+				pLayer->addNodeAsync(sType);
     }
         
 		env->ReleaseStringUTFChars(type, sType);
-		env->ReleaseStringUTFChars(count, sCount);
 	}
 	
 	void Java_com_cocos2dx_moon3d_AppActivity_StartGame(JNIEnv* env, jobject thiz, jstring something){

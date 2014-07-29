@@ -27,25 +27,40 @@ typedef struct tagPEER{
 
 class ConnectionInterface {
 public:
-    static void OnPeerUpdate(tagPEER peer);
 
     static void InvitePeer(tagPEER peer);
     
-    static void ReciveInvite(std::string sessionId);
-    
+    static void SendInviteResponse(bool value);
+
     static void SendMessage(std::string msg);
-    
-    static void ReceiveMessage(std::string message);
-    
+
     static void Disconnect();
+
+    static void OnPeerUpdate(tagPEER peer);
+
+    static void OnReciveInvite(std::string sessionId);
     
-    static std::list<tagPEER> getPeerList(){_mutex.lock(); return _listPeer; _mutex.unlock();}
+    static void OnReceiveMessage(std::string message);
     
-    static void sendInviteResponse(bool value);
+    static void OnAcknowledgment();
+    
+    static void OnDisconnect();
+
+    static void getPeerList(std::list<tagPEER> &listPeer);
+
+    static void getMessageList(std::list<std::string> &listMessage);
+    
 protected:
     static std::list<tagPEER>::iterator queryPeer(tagPEER &peer);
+
     static std::mutex _mutex;
+
+    static std::mutex _mutexMessage;
+    
     static std::list<tagPEER> _listPeer;
+
+    static std::list<std::string> _listMessage;
+    
     static bool _bConnect;
 };
 

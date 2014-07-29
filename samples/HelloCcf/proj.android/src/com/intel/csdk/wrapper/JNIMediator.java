@@ -77,7 +77,9 @@ public class JNIMediator extends STCPlatform{
 	public native void nativePeerRemove(Peer peer);
 	public native void nativeInvite(String peerID);
 	public native void nativeReceiveMsg(String msg);
-
+	public native void nativeInviteAcknowledgment();
+	public native void nativeDisconnect();
+	
 	public JNIMediator(Context context, JNIListener listen){
 		mContext = context;
 		mListener = listen;
@@ -184,11 +186,19 @@ public class JNIMediator extends STCPlatform{
 		
 		if(mListener!=null){
 			mListener.onP2PConnectionStatus(peer, value);
-		}		
+		}
+		
+		if(value ==12){
+			nativeInviteAcknowledgment();
+		}
+		if(value ==25){
+			nativeDisconnect();
+		}
 	}
 	
 	public void onReceiveMsg(String msg){
 		Log.i(LOGC, "message received from JNI: "+msg);
+		if(msg.length() == 0) return;
 		nativeReceiveMsg(msg);
 	}
 	

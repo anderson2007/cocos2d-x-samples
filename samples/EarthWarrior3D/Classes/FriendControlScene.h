@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 
-
 class FriendControl : public cocos2d::Layer
 {
 public:
@@ -14,6 +13,10 @@ public:
     virtual bool init();  
     
     void jniReturnMainMenu();
+    
+    virtual bool onTouchBegan(Touch *touch, Event *event);
+    virtual void onTouchMoved(Touch *touch, Event *event);
+    virtual void onTouchEnded(Touch *touch, Event *event);
     
 protected:
     
@@ -30,6 +33,8 @@ protected:
     
     // implement the "static create()" method manually
     CREATE_FUNC(FriendControl);
+    
+    Sprite3D *_friendPlayer;
 };
 
 #endif // __FriendControl_SCENE_H__

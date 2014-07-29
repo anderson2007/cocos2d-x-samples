@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "PopLayer.h"
+#include "ChatScene.h"
 
 USING_NS_CC;
 
@@ -85,44 +86,12 @@ bool HelloWorld::init()
     auto peerInviteListener = EventListenerCustom::create("IntelCCFPeerInvite", CC_CALLBACK_1(HelloWorld::listenToPeerInvite, this));
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerInviteListener, this);
     
-    return true;
-}
-
-void HelloWorld::listenToPeerUpdate(EventCustom *event)
-{
-    std::list<tagPEER>::iterator iter;
-    std::list<tagPEER> listPeer = ConnectionInterface::getPeerList();
+    auto peerAcknowledgmentListener = EventListenerCustom::create("IntelCCFInviteAcknowledgment", CC_CALLBACK_1(HelloWorld::listenToAcknowledgment, this));
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerAcknowledgmentListener, this);
     
-    CCLOG("receive Discovery");
-    for(iter = listPeer.begin(); iter != listPeer.end(); iter++) {
-        PeerMenuItem *pItem = queryPeerMenuItem((*iter));
-        if ((*iter).add && pItem == NULL) {
-            auto peerItem = PeerMenuItem::create(
-                                                 "CloseNormal.png",
-                                                 "CloseSelected.png",
-                                                 CC_CALLBACK_1(HelloWorld::menuPeerCallback, this));
-            peerItem->setPeer((*iter));
-            peerItem->setTag(10011);
-            peerItem->setPosition(Vec2::ZERO);
-            _menuPeer->addChild(peerItem);
-        }
-        
-        if(!(*iter).add && pItem != NULL){
-            pItem->removeFromParent();
-        }
-    }
-    _menuPeer->alignItemsHorizontally();
-}
-
-void HelloWorld::listenToPeerInvite(EventCustom *event)
-{
-    this->schedule(schedule_selector(HelloWorld::schedulePop),0.1,0,0);
-}
-
-void HelloWorld::schedulePop(float dt)
-{
-    auto popLayer = PopLayer::create();
-    addChild(popLayer, 1);
+    schedulePeer(0);
+    
+    return true;
 }
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
@@ -131,13 +100,73 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
-
-    Director::getInstance()->end();    
+    
+    Director::getInstance()->end();
     ConnectionInterface::Disconnect();
-
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void HelloWorld::listenToPeerUpdate(EventCustom *event)
+{
+    this->schedule(schedule_selector(HelloWorld::schedulePeer));
+}
+
+void HelloWorld::schedulePeer(float dt)
+{
+    std::list<tagPEER> listPeer;
+    ConnectionInterface::getPeerList(listPeer);
+    
+    if (listPeer.size() == 0) return;
+    
+    CCLOG("receive Discovery");
+    while(listPeer.size()){
+        tagPEER tempPeer = listPeer.front();
+        
+        PeerMenuItem *pItem = queryPeerMenuItem(tempPeer);
+        if (tempPeer.add && pItem == NULL) {
+            auto peerItem = PeerMenuItem::create(
+                                                 "CloseNormal.png",
+                                                 "CloseSelected.png",
+                                                 CC_CALLBACK_1(HelloWorld::menuPeerCallback, this));
+            peerItem->setPeer(tempPeer);
+            peerItem->setTag(10011);
+            peerItem->setPosition(Vec2::ZERO);
+            _menuPeer->addChild(peerItem);
+        }
+        
+        if(tempPeer.add && pItem != NULL){
+            pItem->removeFromParent();
+        }
+        
+        listPeer.pop_front();
+    }
+
+    _menuPeer->alignItemsHorizontally();
+}
+
+void HelloWorld::listenToPeerInvite(EventCustom *event)
+{
+    this->schedule(schedule_selector(HelloWorld::schedulePop));
+}
+
+void HelloWorld::schedulePop(float dt)
+{
+    auto popLayer = PopLayer::create();
+    addChild(popLayer, 1);
+}
+
+void HelloWorld::listenToAcknowledgment(cocos2d::EventCustom *event)
+{
+    this->schedule(schedule_selector(HelloWorld::scheduleAcknowledgement));
+}
+
+void HelloWorld::scheduleAcknowledgement(float dt)
+{
+    auto scene = ChatLayer::createScene();
+    Director::getInstance()->replaceScene(scene);
 }
 
 void HelloWorld::menuPeerCallback(Ref* pSender)

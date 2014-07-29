@@ -64,6 +64,10 @@
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		AC0C8992197F9B07001127EF /* PeerMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0C8990197F9B07001127EF /* PeerMenuItem.cpp */; };
 		AC0C8993197F9B07001127EF /* PeerMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0C8990197F9B07001127EF /* PeerMenuItem.cpp */; };
+		AC1E5FF81986257700DAFDA3 /* ChatScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */; };
+		AC1E5FF91986257700DAFDA3 /* ChatScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */; };
+		AC1E5FFE198634F900DAFDA3 /* ChatProject in Resources */ = {isa = PBXBuildFile; fileRef = AC1E5FFD198634F900DAFDA3 /* ChatProject */; };
+		AC1E5FFF198634F900DAFDA3 /* ChatProject in Resources */ = {isa = PBXBuildFile; fileRef = AC1E5FFD198634F900DAFDA3 /* ChatProject */; };
 		AC4894A51980EF7F00BDB706 /* ConnectionInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC4894A31980EF7F00BDB706 /* ConnectionInterface.cpp */; };
 		AC4894A61980EF7F00BDB706 /* ConnectionInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC4894A31980EF7F00BDB706 /* ConnectionInterface.cpp */; };
 		AC7E4ADD1981F26900ADFD5E /* PopLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC7E4ADB1981F26900ADFD5E /* PopLayer.cpp */; };
@@ -268,6 +272,9 @@
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		AC0C8990197F9B07001127EF /* PeerMenuItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PeerMenuItem.cpp; path = ../Classes/PeerMenuItem.cpp; sourceTree = "<group>"; };
 		AC0C8991197F9B07001127EF /* PeerMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeerMenuItem.h; path = ../Classes/PeerMenuItem.h; sourceTree = "<group>"; };
+		AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChatScene.cpp; path = ../Classes/ChatScene.cpp; sourceTree = "<group>"; };
+		AC1E5FF71986257700DAFDA3 /* ChatScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatScene.h; path = ../Classes/ChatScene.h; sourceTree = "<group>"; };
+		AC1E5FFD198634F900DAFDA3 /* ChatProject */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ChatProject; sourceTree = "<group>"; };
 		AC4894A31980EF7F00BDB706 /* ConnectionInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConnectionInterface.cpp; path = ../Classes/ConnectionInterface.cpp; sourceTree = "<group>"; };
 		AC4894A41980EF7F00BDB706 /* ConnectionInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionInterface.h; path = ../Classes/ConnectionInterface.h; sourceTree = "<group>"; };
 		AC7E4ADB1981F26900ADFD5E /* PopLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopLayer.cpp; path = ../Classes/PopLayer.cpp; sourceTree = "<group>"; };
@@ -358,6 +365,8 @@
 				AC4894A41980EF7F00BDB706 /* ConnectionInterface.h */,
 				AC7E4ADB1981F26900ADFD5E /* PopLayer.cpp */,
 				AC7E4ADC1981F26900ADFD5E /* PopLayer.h */,
+				AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */,
+				AC1E5FF71986257700DAFDA3 /* ChatScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -473,6 +482,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AC1E5FFD198634F900DAFDA3 /* ChatProject */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -659,6 +669,7 @@
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				AC1E5FFE198634F900DAFDA3 /* ChatProject in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -675,6 +686,7 @@
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				5087E75417EB910900C73F5D /* CloseSelected.png in Resources */,
 				5087E75517EB910900C73F5D /* HelloWorld.png in Resources */,
+				AC1E5FFF198634F900DAFDA3 /* ChatProject in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +699,7 @@
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				AC7E4ADD1981F26900ADFD5E /* PopLayer.cpp in Sources */,
+				AC1E5FF81986257700DAFDA3 /* ChatScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				AC4894A51980EF7F00BDB706 /* ConnectionInterface.cpp in Sources */,
@@ -701,6 +714,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
+				AC1E5FF91986257700DAFDA3 /* ChatScene.cpp in Sources */,
 				AC0C8993197F9B07001127EF /* PeerMenuItem.cpp in Sources */,
 				5087E75817EB910900C73F5D /* HelloWorldScene.cpp in Sources */,
 				AC7E4ADE1981F26900ADFD5E /* PopLayer.cpp in Sources */,
