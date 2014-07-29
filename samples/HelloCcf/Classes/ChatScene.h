@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 #include "editor-support/cocostudio/CocoStudio.h"
-#include "CocosGUI.h"
+#include "cocos/ui/CocosGUI.h"
 using namespace cocos2d::ui;
 
 
@@ -27,11 +27,22 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(ChatLayer);
     
+    void receiveMessage(std::string message);
+    
 private:
-    Node* rootNode;
+    void listenToReceiveMessage(cocos2d::EventCustom *event);
+    
+    void listenToDisconnect(cocos2d::EventCustom *event);
+    
     void touchEvent(Ref*pSender, Widget::TouchEventType type);
+    
+    void scheduleReceiveMessage(float dt);
+    
+    void scheduleDisconnect(float dt);
+    
     ListView *listView;
     TextField *textField;
+    Node* rootNode;
 };
 
 #endif /* defined(__HelloCcf__ChatScene__) */

@@ -8,7 +8,7 @@
 
 #include "ChatScene.h"
 #include "ConnectionInterface.h"
-
+#include "HelloWorldScene.h"
 USING_NS_CC;
 
 Scene* ChatLayer::createScene()
@@ -21,6 +21,8 @@ Scene* ChatLayer::createScene()
     
     // add layer as a child to scene
     scene->addChild(layer);
+    
+    layer->setTag(10012);
         
     // return the scene
     return scene;
@@ -42,7 +44,6 @@ bool ChatLayer::init()
     //读取导出的json文件，并将编辑器中的画面添加到游戏界面
     rootNode =cocostudio::timeline::NodeReader::getInstance()->createNode("ChatProject/ChatProject.json");
     this->addChild(rootNode,0);
-    rootNode->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
     
     Node* child = rootNode->getChildByTag(210);
     CCASSERT(child!=NULL, "child 210 should not be null!");
@@ -62,6 +63,12 @@ bool ChatLayer::init()
     CCASSERT(textField!=NULL, "child 211 should not be null!");
     textField->setTextHorizontalAlignment(TextHAlignment::LEFT);
     
+    auto peerListener1 = EventListenerCustom::create("IntelCCFReceiveMessage", CC_CALLBACK_1(ChatLayer::listenToReceiveMessage, this));
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerListener1, this);
+    
+    auto peerListener2 = EventListenerCustom::create("IntelCCFDisconnect", CC_CALLBACK_1(ChatLayer::listenToDisconnect, this));
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerListener2, this);
+    
     return true;
 }
 
@@ -73,6 +80,8 @@ void ChatLayer::touchEvent(Ref*pSender, Widget::TouchEventType type)
         switch (btn->getTag()) {
             case 212:
             {
+                ConnectionInterface::SendMessage(textField->getStringValue());
+                
                 Text* message = Text::create(textField->getStringValue(),"fonts/Marker Felt.ttf",14);
                 message->ignoreContentAdaptWithSize(true);
                 message->setTextHorizontalAlignment(TextHAlignment::LEFT);
@@ -84,14 +93,49 @@ void ChatLayer::touchEvent(Ref*pSender, Widget::TouchEventType type)
             }
                 break;
             case 217:
-                Director::getInstance()->end();
-                #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-                    exit(0);
-                #endif
-                break;
-            default:
+                ConnectionInterface::Disconnect();
+                auto helloworld = HelloWorld::createScene();
+                Director::getInstance()->replaceScene(helloworld);
                 break;
         }
         
     }
 }
+
+void ChatLayer::listenToReceiveMessage(EventCustom *event)
+{
+    this->schedule(schedule_selector(ChatLayer::scheduleReceiveMessage));
+}
+
+void ChatLayer::scheduleReceiveMessage(float dt)
+{
+    std::list<std::string>::iterator iter;
+    std::list<std::string> listMessage;
+    ConnectionInterface::getMessageList(listMessage);
+    
+    while (listMessage.size()) {
+        std::string msg = listMessage.front();
+        
+        Text* message = Text::create(msg,"fonts/Marker Felt.ttf",14);
+        message->ignoreContentAdaptWithSize(true);
+        message->setTextHorizontalAlignment(TextHAlignment::LEFT);
+        message->setTouchScaleChangeEnabled(false);
+        message->setTouchEnabled(false);
+        listView->pushBackCustomItem(message);
+        
+        listMessage.pop_front();
+    }
+}
+
+void ChatLayer::listenToDisconnect(EventCustom *event)
+{
+    this->schedule(schedule_selector(ChatLayer::scheduleDisconnect));
+}
+
+void ChatLayer::scheduleDisconnect(float dt)
+{
+    auto helloworld = HelloWorld::createScene();
+    Director::getInstance()->replaceScene(helloworld);
+}
+
+

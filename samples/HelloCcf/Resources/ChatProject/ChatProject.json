@@ -85,7 +85,7 @@
               "disabledData": {
                 "resourceType": 0
               },
-              "text": "发  送",
+              "text": "send",
               "fontSize": 26,
               "capInsetsWidth": 1.0,
               "capInsetsHeight": 1.0,
