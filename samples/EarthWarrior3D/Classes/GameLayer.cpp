@@ -115,9 +115,7 @@ void GameLayer::gameMaster(float dt)
     }
     
     _elapsed+=dt;
-    
-    return;
-    
+        
     int enemyCount =EnemyController::enemies.size();
     
     //if(_elapsed < 10 && enemyCount < 5)
@@ -303,7 +301,7 @@ void GameLayer::addNodeAsync(const char* type)
             break;
         case 4:
             if(_friendPlayer == NULL) return;
-            _friendPlayer->touchMoved(Point(doc["prevX"].GetDouble(), doc["prevY"].GetDouble()), Point(doc["deltaX"].GetDouble(), doc["deltaY"].GetDouble()));
+            _friendPlayer->touchMoved(Point(doc["deltaX"].GetDouble(), doc["deltaY"].GetDouble()));
             break;
     }
 }

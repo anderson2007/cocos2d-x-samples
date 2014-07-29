@@ -120,25 +120,6 @@ public class JNIMediator extends STCPlatform{
 		
 	}
 	
-	/*public void sessionUpdate(String sessionName, byte[] avatar, String sessionId, Object [] appList, boolean availability) {
-		Log.i(LOGC, "sessionName: "+sessionName+ "sessionId: "+" availability: "+availability+ "appList size: "+appList.length);
-		UUID[] _appList = new UUID[appList.length];
-		for(int i=0; i<appList.length; i++) {
-			_appList[i] = UUID.fromString((String)appList[i]);
-		}
-		final Peer peer = new Peer(sessionName, avatar, sessionId, _appList, availability);
-		
-		if(peer.getAvailability()){
-			add(peer);
-		}else{
-			remove(peer);
-		}
-		
-		if(mListener!=null){
-			mListener.onPeerUpdated(peer);
-		}
-	}*/
-	
 	private void add(Peer peer) {
 		for(int i=0; i<mPeerList.size(); i++) {
 			if(mPeerList.get(i).compareTo(peer) == 0) {

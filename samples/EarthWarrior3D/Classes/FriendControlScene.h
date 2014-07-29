@@ -35,6 +35,8 @@ protected:
     CREATE_FUNC(FriendControl);
     
     Sprite3D *_friendPlayer;
+    
+    Size visibleSize;
 };
 
 #endif // __FriendControl_SCENE_H__

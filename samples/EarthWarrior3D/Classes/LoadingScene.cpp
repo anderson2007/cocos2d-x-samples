@@ -15,6 +15,7 @@
 #include "GameControllers.h"
 #include "ParticleManager.h"
 #include "consts.h"
+#include "FriendControlScene.h"
 
 int LoadingScene::updatecount=0;
 int LoadingScene::m_curPreload_fodder_count=0;
@@ -182,6 +183,8 @@ void LoadingScene::GotoNextScene()
 void LoadingScene::RunNextScene(float dt)
 {
     this->removeAllChildren();
+    
+//    auto helloworldScene=FriendControl::createScene();
     auto helloworldScene=HelloWorld::createScene();
     Director::getInstance()->replaceScene(TransitionZoomFlipX::create(1.0f,helloworldScene));
 

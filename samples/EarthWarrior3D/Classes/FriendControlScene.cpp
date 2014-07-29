@@ -35,7 +35,7 @@ bool FriendControl::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
@@ -210,18 +210,16 @@ bool FriendControl::onTouchBegan(Touch *touch, Event *event)
 
 void FriendControl::onTouchMoved(Touch *touch, Event *event)
 {
-//    Point prev = event->getCurrentTarget()->getPosition();
-//    Point delta =touch->getDelta();
-    
     Point prev = _friendPlayer->getPosition();
-    Point delta =touch->getDelta();
-    _friendPlayer->setPosition(prev+delta);
-    
+    Point delta = touch->getDelta();
+    _friendPlayer->setPosition(prev + delta);
+
+    CCLOG("%f %f", prev.x, prev.y);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
     
-    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/cpp/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
-        jstring stringArg1 = t.env->NewStringUTF(StringUtils::format("{\"type\":4, \"prevX\":%f, \"prevX\":%f, \"deltaX\":%f, \"deltaY\":%f}", prev.x, prev.y, delta.x, delta.y).c_str());
+    if (JniHelper::getStaticMethodInfo(t, "com/cocos2dx/moon3d/AppActivity", "friendControl", "(Ljava/lang/String;)V")) {
+        jstring stringArg1 = t.env->NewStringUTF(StringUtils::format("{\"type\":4, \"deltaX\":%f, \"deltaY\":%f}", prev.x, prev.y, delta.x, delta.y).c_str());
         
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
         t.env->DeleteLocalRef(t.classID);

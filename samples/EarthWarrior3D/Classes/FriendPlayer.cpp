@@ -55,16 +55,16 @@ void FriendPlayer::update(float dt)
     targetAngle = getRotation3D().y;
 }
 
-void FriendPlayer::touchMoved(Point prev, Point delta)
+void FriendPlayer::touchMoved(Point delta)
 {
+    _prev = getPosition();
     _delta = delta;
-    _prev = prev;
 
     Point shiftPosition = _delta+_prev;
     
-    setPosition(shiftPosition.getClampPoint(Point(PLAYER_LIMIT_LEFT,PLAYER_LIMIT_BOT),Point(PLAYER_LIMIT_RIGHT,PLAYER_LIMIT_TOP)));
-
     setTargetAngle(targetAngle+_delta.x*rollSpeed*(rollReturnThreshold-fabsf(targetAngle)/maxRoll));
+    
+    setPosition(shiftPosition.getClampPoint(Point(PLAYER_LIMIT_LEFT,PLAYER_LIMIT_BOT),Point(PLAYER_LIMIT_RIGHT,PLAYER_LIMIT_TOP)));
 }
 
 void FriendPlayer::shoot(float dt)
@@ -90,6 +90,8 @@ void FriendPlayer::setPosition(Point pos)
     {
         _emissionPart->setPosition(pos);
     }
+    
+    CCLOG("FriendPlayer %f %f", _position.x, _position.y);
 }
 void FriendPlayer::shootMissile(float dt)
 {

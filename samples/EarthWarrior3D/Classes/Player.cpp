@@ -75,6 +75,8 @@ void Player::onTouchMoved(Touch *touch, Event *event)
     Point shiftPosition = delta+prev;
   
     setPosition(shiftPosition.getClampPoint(Point(PLAYER_LIMIT_LEFT,PLAYER_LIMIT_BOT),Point(PLAYER_LIMIT_RIGHT,PLAYER_LIMIT_TOP)));
+    
+    CCLOG("%f %f", shiftPosition.x, shiftPosition.y);
 }
 void Player::onTouchEnded(Touch *touch, Event *event)
 {
