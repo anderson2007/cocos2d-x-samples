@@ -1,25 +1,27 @@
 //
-//  PeerMenuItem.cpp
+//  PeerButton.cpp
 //  HelloCcf
 //
 //  Created by calf on 14-7-23.
 //
 //
 
-#include "PeerMenuItem.h"
+#include "PeerButton.h"
 
 ///
-/// MenuItemImage
+/// PeerButton
 ///
 
-PeerMenuItem * PeerMenuItem::create(const std::string& normalImage, const std::string& selectedImage, const cocos2d::ccMenuCallback& callback)
+PeerButton* PeerButton::create(const std::string &normalImage,
+                       const std::string& selectedImage ,
+                       const std::string& disableImage,
+                       TextureResType texType)
 {
-    PeerMenuItem *ret = new PeerMenuItem();
-    if (ret && ret->initWithNormalImage(normalImage, selectedImage, "", callback))
-    {
-        ret->autorelease();
-        return ret;
+    PeerButton *btn = new PeerButton();
+    if (btn && btn->init(normalImage,selectedImage,disableImage,texType)) {
+        btn->autorelease();
+        return btn;
     }
-    CC_SAFE_DELETE(ret);
+    CC_SAFE_DELETE(btn);
     return nullptr;
 }

@@ -1,22 +1,27 @@
 //
-//  PeerMenuItem.h
+//  PeerButton.h
 //  HelloCcf
 //
 //  Created by calf on 14-7-23.
 //
 //
 
-#ifndef __HelloCcf__PeerMenuItem__
-#define __HelloCcf__PeerMenuItem__
+#ifndef __HelloCcf__PeerButton__
+#define __HelloCcf__PeerButton__
 
-#include <iostream>
 #include "cocos2d.h"
 #include "ConnectionInterface.h"
+#include "editor-support/cocostudio/CocoStudio.h"
+#include "cocos/ui/CocosGUI.h"
+using namespace cocos2d::ui;
 
-class PeerMenuItem : public cocos2d::MenuItemImage
+class PeerButton : public Button
 {
 public:
-    static PeerMenuItem* create(const std::string&normalImage, const std::string&selectedImage, const cocos2d::ccMenuCallback& callback);
+    static PeerButton* create(const std::string& normalImage,
+                          const std::string& selectedImage = "",
+                          const std::string& disableImage = "",
+                          TextureResType texType = TextureResType::LOCAL);
     tagPEER getPeer(){return _peer;}
     void setPeer(tagPEER peer){_peer = peer;}
 protected:
