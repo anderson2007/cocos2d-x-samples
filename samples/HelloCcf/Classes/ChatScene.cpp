@@ -9,6 +9,7 @@
 #include "ChatScene.h"
 #include "ConnectionInterface.h"
 #include "HelloWorldScene.h"
+
 USING_NS_CC;
 
 Scene* ChatLayer::createScene()

@@ -109,7 +109,8 @@ public class JNIMediator extends STCPlatform{
 	}
 	
 	public void onPeerDiscovery(String peerID, String userName, String deviceName, byte [] avatar,Object [] appList, boolean isAvailable, boolean isAvailableCloud, boolean isAvailableProximity){
-	
+		if(peerID.length() == 0) return;
+		
 		Log.i(LOGC, "sessionName: "+userName+ "sessionId: "+" availability: "+isAvailable+ "appList size: "+appList.length);
 		UUID[] _appList = new UUID[appList.length];
 		for(int i=0; i<appList.length; i++) {

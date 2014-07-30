@@ -33,7 +33,7 @@ bool PopLayer::init()
         
 		Size winSize = Director::getInstance()->getWinSize();
         
-		Sprite * background = Sprite::create("HelloWorld.png");
+		Sprite * background = Sprite::create("listviewbg.png");
 		m_bgSprite = background;
 		background->setPosition(Vec2(winSize.width/2,winSize.height/2));
 		this->addChild(background);

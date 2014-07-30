@@ -27,7 +27,9 @@ THE SOFTWARE.
 package org.cocos2dx.helloccf;
 
 import java.io.ByteArrayOutputStream;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -80,6 +82,12 @@ public class AppActivity extends Cocos2dxActivity implements P2PEventListener {
 		mPreference = getSharedPreferences("Helloccf", Context.MODE_PRIVATE);
 		sAppActivity = this;
 	}
+
+    public Cocos2dxGLSurfaceView onCreateView() { 
+    	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this); 
+    	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8); 
+    	return glSurfaceView; 
+    	}
 
 	@Override
 	protected void onResume() {

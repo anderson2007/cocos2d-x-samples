@@ -161,7 +161,6 @@ void ConnectionInterface::getPeerList(std::list<tagPEER> &listPeer)
 {
     _mutex.lock();
     listPeer = std::list<tagPEER>(_listPeer);
-    CCLOG("getPeerList %d", listPeer.size());
     _mutex.unlock();
 }
 
@@ -169,7 +168,6 @@ void ConnectionInterface::getMessageList(std::list<std::string> &listMessage)
 {
     _mutexMessage.lock();
     listMessage = std::list<std::string>(_listMessage);
-    CCLOG("getMessageList %d", listMessage.size());
     _listMessage.clear();
     _mutexMessage.unlock();
 }

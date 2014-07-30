@@ -16,7 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/ConnectionInterface.cpp \
                    ../../Classes/PopLayer.cpp \
                    ../../Classes/ChatScene.cpp \
-                   ../../Classes/PeerMenuItem.cpp 
+                   ../../Classes/PeerButton.cpp 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

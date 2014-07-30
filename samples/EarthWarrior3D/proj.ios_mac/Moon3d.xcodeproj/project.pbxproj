@@ -67,6 +67,8 @@
 		AC14CED11935BE5F0064D545 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AC14CECF1935BE5F0064D545 /* CloseSelected.png */; };
 		AC3D0DEA19767B9900513649 /* potion2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC3D0DE919767B9900513649 /* potion2.png */; };
 		AC3D0DEB19767B9900513649 /* potion2.png in Resources */ = {isa = PBXBuildFile; fileRef = AC3D0DE919767B9900513649 /* potion2.png */; };
+		AC40FF5519888B9500611C0F /* ConnectionInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC40FF5319888B9500611C0F /* ConnectionInterface.cpp */; };
+		AC40FF5619888B9500611C0F /* ConnectionInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC40FF5319888B9500611C0F /* ConnectionInterface.cpp */; };
 		AC69E74F192B3C31006CDFC8 /* Reward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC69E74D192B3C31006CDFC8 /* Reward.cpp */; };
 		AC69E755192B44CE006CDFC8 /* potion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AC69E754192B44CE006CDFC8 /* potion.jpg */; };
 		AC6AD7F619764B1E00E5477C /* FriendPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC6AD7F419764B1E00E5477C /* FriendPlayer.cpp */; };
@@ -419,6 +421,8 @@
 		AC14CECE1935BE5F0064D545 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		AC14CECF1935BE5F0064D545 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		AC3D0DE919767B9900513649 /* potion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potion2.png; sourceTree = "<group>"; };
+		AC40FF5319888B9500611C0F /* ConnectionInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConnectionInterface.cpp; path = ../Classes/ConnectionInterface.cpp; sourceTree = "<group>"; };
+		AC40FF5419888B9500611C0F /* ConnectionInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionInterface.h; path = ../Classes/ConnectionInterface.h; sourceTree = "<group>"; };
 		AC69E74D192B3C31006CDFC8 /* Reward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Reward.cpp; path = ../Classes/Reward.cpp; sourceTree = "<group>"; };
 		AC69E74E192B3C31006CDFC8 /* Reward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reward.h; path = ../Classes/Reward.h; sourceTree = "<group>"; };
 		AC69E754192B44CE006CDFC8 /* potion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = potion.jpg; sourceTree = "<group>"; };
@@ -639,6 +643,8 @@
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				AC14CEBF1935B9AA0064D545 /* FriendControlScene.cpp */,
 				AC14CEC01935B9AA0064D545 /* FriendControlScene.h */,
+				AC40FF5319888B9500611C0F /* ConnectionInterface.cpp */,
+				AC40FF5419888B9500611C0F /* ConnectionInterface.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1177,6 +1183,7 @@
 				BB0C48A7190910CE0015152C /* Sprite3D.cpp in Sources */,
 				BB0C48A5190910CE0015152C /* MeshCache.cpp in Sources */,
 				BB0C48C1190910CE0015152C /* ParticleManager.cpp in Sources */,
+				AC40FF5519888B9500611C0F /* ConnectionInterface.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				BB0C48AB190910CE0015152C /* Bullets.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -1203,6 +1210,7 @@
 				BB0C48A6190910CE0015152C /* MeshCache.cpp in Sources */,
 				BB0C48AA190910CE0015152C /* AirCraft.cpp in Sources */,
 				AC6AD7F719764B1E00E5477C /* FriendPlayer.cpp in Sources */,
+				AC40FF5619888B9500611C0F /* ConnectionInterface.cpp in Sources */,
 				BB0C48C6190910CE0015152C /* Player.cpp in Sources */,
 				BB0C48B8190910CE0015152C /* GameLayer.cpp in Sources */,
 				BB0C48B4190910CE0015152C /* GameControllers.cpp in Sources */,

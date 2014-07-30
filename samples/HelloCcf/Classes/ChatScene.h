@@ -39,7 +39,7 @@ private:
     void scheduleReceiveMessage(float dt);
     
     void scheduleDisconnect(float dt);
-    
+        
     ListView *listView;
     TextField *textField;
     Node* rootNode;

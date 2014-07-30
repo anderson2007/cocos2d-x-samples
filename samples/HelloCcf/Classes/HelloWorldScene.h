@@ -2,7 +2,10 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-#include "PeerMenuItem.h"
+#include "PeerButton.h"
+#include "editor-support/cocostudio/CocoStudio.h"
+#include "cocos/ui/CocosGUI.h"
+USING_NS_CC;
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -19,7 +22,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
     
-    void menuPeerCallback(cocos2d::Ref* pSender);
+//    void menuPeerCallback(cocos2d::Ref* pSender);
 
 protected:
     void listenToPeerUpdate(cocos2d::EventCustom *event);
@@ -34,9 +37,13 @@ protected:
     
     void schedulePop(float dt);
 
-    PeerMenuItem* queryPeerMenuItem(tagPEER peer);
+    void initListView();
     
-    cocos2d::Menu *_menuPeer;
+    void selectedItemEvent(Ref* pSender, ListView::EventType type);
+
+    Widget* queryPeerMenuItem(tagPEER peer);
+    
+    ListView* _listView;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
