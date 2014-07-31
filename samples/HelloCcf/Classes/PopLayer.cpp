@@ -34,6 +34,7 @@ bool PopLayer::init()
 		Size winSize = Director::getInstance()->getWinSize();
         
 		Sprite * background = Sprite::create("listviewbg.png");
+        background->setScale(2);
 		m_bgSprite = background;
 		background->setPosition(Vec2(winSize.width/2,winSize.height/2));
 		this->addChild(background);
@@ -41,11 +42,11 @@ bool PopLayer::init()
 		Size contentSize = background->getContentSize();
 		m_size = contentSize;
         
-        auto item1 = MenuItemLabel::create(Label::create("Accepte","fonts/Marker Felt.ttf", 20), CC_CALLBACK_1(PopLayer::yesButton, this));
+        auto item1 = MenuItemLabel::create(Label::create("Accept","fonts/Marker Felt.ttf", 20), CC_CALLBACK_1(PopLayer::yesButton, this));
 		auto item2 = MenuItemLabel::create(Label::create("Reject","fonts/Marker Felt.ttf", 20), CC_CALLBACK_1(PopLayer::noButton, this));
         
 		Menu * menu = Menu::create(item1,item2,NULL);
-		menu->alignItemsHorizontallyWithPadding(5);
+		menu->alignItemsHorizontallyWithPadding(50);
 		menu->setPosition(Vec2(contentSize.width/2,contentSize.height/3));
         
 		background->addChild(menu);

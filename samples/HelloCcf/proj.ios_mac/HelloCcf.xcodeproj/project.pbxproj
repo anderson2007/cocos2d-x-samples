@@ -66,8 +66,6 @@
 		AC0C8993197F9B07001127EF /* PeerButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0C8990197F9B07001127EF /* PeerButton.cpp */; };
 		AC1E5FF81986257700DAFDA3 /* ChatScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */; };
 		AC1E5FF91986257700DAFDA3 /* ChatScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */; };
-		AC1E5FFE198634F900DAFDA3 /* ChatProject in Resources */ = {isa = PBXBuildFile; fileRef = AC1E5FFD198634F900DAFDA3 /* ChatProject */; };
-		AC1E5FFF198634F900DAFDA3 /* ChatProject in Resources */ = {isa = PBXBuildFile; fileRef = AC1E5FFD198634F900DAFDA3 /* ChatProject */; };
 		AC36AA701988C6A00019A7AC /* listviewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AC36AA6F1988C6A00019A7AC /* listviewbg.png */; };
 		AC36AA711988C6A00019A7AC /* listviewbg.png in Resources */ = {isa = PBXBuildFile; fileRef = AC36AA6F1988C6A00019A7AC /* listviewbg.png */; };
 		AC36AA761988C86C0019A7AC /* backtotopnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = AC36AA741988C86C0019A7AC /* backtotopnormal.png */; };
@@ -280,7 +278,6 @@
 		AC0C8991197F9B07001127EF /* PeerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeerButton.h; path = ../Classes/PeerButton.h; sourceTree = "<group>"; };
 		AC1E5FF61986257700DAFDA3 /* ChatScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChatScene.cpp; path = ../Classes/ChatScene.cpp; sourceTree = "<group>"; };
 		AC1E5FF71986257700DAFDA3 /* ChatScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatScene.h; path = ../Classes/ChatScene.h; sourceTree = "<group>"; };
-		AC1E5FFD198634F900DAFDA3 /* ChatProject */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ChatProject; sourceTree = "<group>"; };
 		AC36AA6F1988C6A00019A7AC /* listviewbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listviewbg.png; sourceTree = "<group>"; };
 		AC36AA741988C86C0019A7AC /* backtotopnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotopnormal.png; sourceTree = "<group>"; };
 		AC36AA751988C86C0019A7AC /* backtotoppressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotoppressed.png; sourceTree = "<group>"; };
@@ -491,7 +488,6 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AC1E5FFD198634F900DAFDA3 /* ChatProject */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				AC36AA741988C86C0019A7AC /* backtotopnormal.png */,
 				AC36AA751988C86C0019A7AC /* backtotoppressed.png */,
@@ -682,7 +678,6 @@
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
-				AC1E5FFE198634F900DAFDA3 /* ChatProject in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				AC36AA781988C86C0019A7AC /* backtotoppressed.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
@@ -703,7 +698,6 @@
 				5087E75517EB910900C73F5D /* HelloWorld.png in Resources */,
 				AC36AA791988C86C0019A7AC /* backtotoppressed.png in Resources */,
 				AC36AA771988C86C0019A7AC /* backtotopnormal.png in Resources */,
-				AC1E5FFF198634F900DAFDA3 /* ChatProject in Resources */,
 				AC36AA711988C6A00019A7AC /* listviewbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

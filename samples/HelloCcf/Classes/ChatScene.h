@@ -39,10 +39,12 @@ private:
     void scheduleReceiveMessage(float dt);
     
     void scheduleDisconnect(float dt);
-        
-    ListView *listView;
+    
+    void initListView();
+    
+    
+    ListView *_listView;
     TextField *textField;
-    Node* rootNode;
 };
 
 #endif /* defined(__HelloCcf__ChatScene__) */

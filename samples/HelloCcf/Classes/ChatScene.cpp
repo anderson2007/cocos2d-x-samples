@@ -42,27 +42,29 @@ bool ChatLayer::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    //读取导出的json文件，并将编辑器中的画面添加到游戏界面
-    rootNode =cocostudio::timeline::NodeReader::getInstance()->createNode("ChatProject/ChatProject.json");
-    this->addChild(rootNode,0);
+    auto closeBtn = Button::create("CloseNormal.png");
+	closeBtn->setPosition(Vec2(origin.x + visibleSize.width - closeBtn->getContentSize().width/2 ,
+                                origin.y + visibleSize.height - closeBtn->getContentSize().height/2));
+    closeBtn->setTag(217);
+    addChild(closeBtn, 0);
+    closeBtn->addTouchEventListener(CC_CALLBACK_2(ChatLayer::touchEvent,this));
     
-    Node* child = rootNode->getChildByTag(210);
-    CCASSERT(child!=NULL, "child 210 should not be null!");
-    
-    Button *sendBtn = (Button*)child->getChildByTag(212);
-    CCASSERT(sendBtn!=NULL, "child 212 should not be null!");
+    auto sendBtn = Button::create("backtotoppressed.png");
+    sendBtn->setTitleText("send");
+    sendBtn->setTitleFontSize(26);
+	sendBtn->setPosition(Vec2(origin.x + visibleSize.width - sendBtn->getContentSize().width/2 ,
+                               origin.y + sendBtn->getContentSize().height/2));
+    sendBtn->setTag(212);
+    addChild(sendBtn, 0);
     sendBtn->addTouchEventListener(CC_CALLBACK_2(ChatLayer::touchEvent,this));
     
-    Button *closeBtn = (Button*)child->getChildByTag(217);
-    CCASSERT(closeBtn!=NULL, "child 218 should not be null!");
-    closeBtn->addTouchEventListener(CC_CALLBACK_2(ChatLayer::touchEvent,this));
-        
-    listView = (ListView*)child->getChildByTag(214);
-    CCASSERT(listView!=NULL, "child 214 should not be null!");
-    
-    textField = (TextField *)child->getChildByTag(211);
-    CCASSERT(textField!=NULL, "child 211 should not be null!");
+    textField = TextField::create("input text here", "", 26);
+	textField->setPosition(Vec2(origin.x + visibleSize.width/2 - sendBtn->getContentSize().width/2 ,
+                              origin.y + sendBtn->getContentSize().height/2));
     textField->setTextHorizontalAlignment(TextHAlignment::LEFT);
+    addChild(textField, 0);
+
+    initListView();
     
     auto peerListener1 = EventListenerCustom::create("IntelCCFReceiveMessage", CC_CALLBACK_1(ChatLayer::listenToReceiveMessage, this));
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerListener1, this);
@@ -71,6 +73,23 @@ bool ChatLayer::init()
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(peerListener2, this);
     
     return true;
+}
+
+void ChatLayer::initListView()
+{
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    _listView = ListView::create();
+    _listView->setDirection(ui::ScrollView::Direction::VERTICAL);
+    _listView->setTouchEnabled(true);
+    _listView->setBounceEnabled(true);
+    _listView->setBackGroundImage("listviewbg.png");
+    _listView->setBackGroundImageScale9Enabled(true);
+    _listView->setSize(Size(visibleSize.width, visibleSize.height - 100));
+    _listView->setPosition(Point(visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+    _listView->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    
+    addChild(_listView,1);
 }
 
 void ChatLayer::touchEvent(Ref*pSender, Widget::TouchEventType type)
@@ -83,13 +102,13 @@ void ChatLayer::touchEvent(Ref*pSender, Widget::TouchEventType type)
             {
                 ConnectionInterface::SendMessage(textField->getStringValue());
                 
-                Text* message = Text::create(textField->getStringValue(),"fonts/Marker Felt.ttf",14);
+                Text* message = Text::create(textField->getStringValue(),"fonts/Marker Felt.ttf",32);
                 message->ignoreContentAdaptWithSize(true);
                 message->setTextHorizontalAlignment(TextHAlignment::LEFT);
                 message->setTouchScaleChangeEnabled(false);
                 message->setTouchEnabled(false);
 
-                listView->pushBackCustomItem(message);
+                _listView->pushBackCustomItem(message);
                 textField->setText("");
             }
                 break;
@@ -103,9 +122,10 @@ void ChatLayer::touchEvent(Ref*pSender, Widget::TouchEventType type)
     }
 }
 
+
 void ChatLayer::listenToReceiveMessage(EventCustom *event)
 {
-    this->schedule(schedule_selector(ChatLayer::scheduleReceiveMessage));
+    this->scheduleOnce(schedule_selector(ChatLayer::scheduleReceiveMessage), 0);
 }
 
 void ChatLayer::scheduleReceiveMessage(float dt)
@@ -117,12 +137,13 @@ void ChatLayer::scheduleReceiveMessage(float dt)
     while (listMessage.size()) {
         std::string msg = listMessage.front();
         
-        Text* message = Text::create(msg,"fonts/Marker Felt.ttf",14);
+        Text* message = Text::create(msg,"fonts/Marker Felt.ttf",32);
         message->ignoreContentAdaptWithSize(true);
         message->setTextHorizontalAlignment(TextHAlignment::LEFT);
         message->setTouchScaleChangeEnabled(false);
         message->setTouchEnabled(false);
-        listView->pushBackCustomItem(message);
+        message->setColor(Color3B::GREEN);
+        _listView->pushBackCustomItem(message);
         
         listMessage.pop_front();
     }
@@ -130,7 +151,7 @@ void ChatLayer::scheduleReceiveMessage(float dt)
 
 void ChatLayer::listenToDisconnect(EventCustom *event)
 {
-    this->schedule(schedule_selector(ChatLayer::scheduleDisconnect));
+    this->scheduleOnce(schedule_selector(ChatLayer::scheduleDisconnect), 0);
 }
 
 void ChatLayer::scheduleDisconnect(float dt)

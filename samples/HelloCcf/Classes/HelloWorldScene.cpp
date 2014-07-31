@@ -154,7 +154,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 void HelloWorld::listenToPeerUpdate(EventCustom *event)
 {
-    this->schedule(schedule_selector(HelloWorld::schedulePeer));
+    this->scheduleOnce(schedule_selector(HelloWorld::schedulePeer), 0);
 }
 
 void HelloWorld::schedulePeer(float dt)
@@ -164,10 +164,11 @@ void HelloWorld::schedulePeer(float dt)
     
     if (listPeer.size() == 0) return;
     
-    CCLOG("HelloWorld schedulePeer");
     while(listPeer.size()){
         tagPEER tempPeer = listPeer.front();
         
+        CCLOG("HelloWorld schedulePeer:%s", tempPeer._sessionName.c_str());
+
         Widget *pItem = queryPeerMenuItem(tempPeer);
         if (tempPeer.add && pItem == NULL) {
 
@@ -178,17 +179,18 @@ void HelloWorld::schedulePeer(float dt)
             custom_button->setPeer(tempPeer);
             custom_button->setTag(10011);
             
+            
             Layout *custom_item = Layout::create();
             custom_item->setContentSize(custom_button->getContentSize());
-            custom_button->setPosition(Vec2(custom_item->getContentSize().width / 2.0f, custom_item->getContentSize().height / 2.0f));
+            custom_item->setTouchEnabled(true);
             custom_item->setTag(10010);
             custom_item->addChild(custom_button, 0);
             custom_button->setPosition(Vec2(_listView->getContentSize().width/2, -100));
             
-            _listView->addChild(custom_item, 0);
+            _listView->addChild(custom_item);
         }
         
-        if(tempPeer.add && pItem != NULL){
+        if(!tempPeer.add && pItem != NULL){
             pItem->removeFromParent();
         }
         
@@ -198,7 +200,7 @@ void HelloWorld::schedulePeer(float dt)
 
 void HelloWorld::listenToPeerInvite(EventCustom *event)
 {
-    this->schedule(schedule_selector(HelloWorld::schedulePop));
+    this->scheduleOnce(schedule_selector(HelloWorld::schedulePop), 0);
 }
 
 void HelloWorld::schedulePop(float dt)
@@ -209,7 +211,7 @@ void HelloWorld::schedulePop(float dt)
 
 void HelloWorld::listenToAcknowledgment(cocos2d::EventCustom *event)
 {
-    this->schedule(schedule_selector(HelloWorld::scheduleAcknowledgement));
+    this->scheduleOnce(schedule_selector(HelloWorld::scheduleAcknowledgement), 0);
 }
 
 void HelloWorld::scheduleAcknowledgement(float dt)
