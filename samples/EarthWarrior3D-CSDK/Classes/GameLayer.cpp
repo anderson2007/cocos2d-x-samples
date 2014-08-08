@@ -278,6 +278,7 @@ void GameLayer::update(float dt)
     //_cloud->setTextureRect(Rect(0,((int)xScroll)%1024, 256, 1024));
     if (!isDie) {
         GameController::update(dt, _player);
+        GameController::update(dt, _friendPlayer);
     }
     else
     {

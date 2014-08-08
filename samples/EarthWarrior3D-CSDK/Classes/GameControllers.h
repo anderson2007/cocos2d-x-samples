@@ -85,7 +85,7 @@ protected:
 class GameController
 {
 public:
-    static void update(float dt, Player* player);
+    static void update(float dt, AirCraft* player);
 };
 
 #endif /* defined(__Moon3d__BulletController__) */

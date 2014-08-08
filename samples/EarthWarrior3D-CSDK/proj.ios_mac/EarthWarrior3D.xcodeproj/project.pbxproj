@@ -96,8 +96,7 @@
 		AC1904D9198B7B4B00A2307E /* PeerButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1904D6198B7B4B00A2307E /* PeerButton.cpp */; };
 		AC1904DC198B7BC800A2307E /* PopLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1904DA198B7BC800A2307E /* PopLayer.cpp */; };
 		AC1904DD198B7BC800A2307E /* PopLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC1904DA198B7BC800A2307E /* PopLayer.cpp */; };
-		AC1904DF198B87E100A2307E /* pkstart.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1904DE198B87E100A2307E /* pkstart.png */; };
-		AC1904E0198B87E100A2307E /* pkstart.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1904DE198B87E100A2307E /* pkstart.png */; };
+		AC2852911994684D00A2A767 /* pkstart.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2852901994684D00A2A767 /* pkstart.png */; };
 		B21386761925C30000A2C310 /* Sprite3DEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21386741925C30000A2C310 /* Sprite3DEffect.cpp */; };
 		B21386771925C30000A2C310 /* Sprite3DEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21386741925C30000A2C310 /* Sprite3DEffect.cpp */; };
 		B213867B1925C60E00A2C310 /* Shaders3D in Resources */ = {isa = PBXBuildFile; fileRef = B213867A1925C60E00A2C310 /* Shaders3D */; };
@@ -461,7 +460,7 @@
 		AC1904D7198B7B4B00A2307E /* PeerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeerButton.h; path = ../Classes/PeerButton.h; sourceTree = "<group>"; };
 		AC1904DA198B7BC800A2307E /* PopLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopLayer.cpp; path = ../Classes/PopLayer.cpp; sourceTree = "<group>"; };
 		AC1904DB198B7BC800A2307E /* PopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopLayer.h; path = ../Classes/PopLayer.h; sourceTree = "<group>"; };
-		AC1904DE198B87E100A2307E /* pkstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pkstart.png; path = ../../sample/samples/EarthWarrior3D/Resources/pkstart.png; sourceTree = "<group>"; };
+		AC2852901994684D00A2A767 /* pkstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pkstart.png; sourceTree = "<group>"; };
 		B21386741925C30000A2C310 /* Sprite3DEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sprite3DEffect.cpp; path = ../Classes/Sprite3DEffect.cpp; sourceTree = "<group>"; };
 		B21386751925C30000A2C310 /* Sprite3DEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sprite3DEffect.h; path = ../Classes/Sprite3DEffect.h; sourceTree = "<group>"; };
 		B213867A1925C60E00A2C310 /* Shaders3D */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders3D; sourceTree = "<group>"; };
@@ -793,7 +792,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AC1904DE198B87E100A2307E /* pkstart.png */,
+				AC2852901994684D00A2A767 /* pkstart.png */,
 				AC1904C7198B736B00A2307E /* potion2.png */,
 				AC1904A7198B72BF00A2307E /* backtotopnormal.png */,
 				AC1904A8198B72BF00A2307E /* backtotoppressed.png */,
@@ -1043,6 +1042,7 @@
 				76B5F2F4195C47BC00C15B36 /* coconut.c3b in Resources */,
 				AC1904B3198B72BF00A2307E /* CloseNormal.png in Resources */,
 				BB0C4911190910E70015152C /* credits_03.png in Resources */,
+				AC2852911994684D00A2A767 /* pkstart.png in Resources */,
 				76B5F2F8195C47BC00C15B36 /* playerv002.c3b in Resources */,
 				BB0C4903190910E70015152C /* boom2.mp3 in Resources */,
 				BB0C4929190910E70015152C /* explodeEffect.mp3 in Resources */,
@@ -1115,7 +1115,6 @@
 				BB0C491F190910E70015152C /* dijiyuanv001.obj in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				BB0C4917190910E70015152C /* debris.plist in Resources */,
-				AC1904DF198B87E100A2307E /* pkstart.png in Resources */,
 				BB0C4963190910E70015152C /* Star_Chaser.mp3 in Resources */,
 				BB0C4955190910E70015152C /* Particle.plist in Resources */,
 				AC1904B5198B72BF00A2307E /* CloseSelected.png in Resources */,
@@ -1127,7 +1126,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2EA97A196BF8F2005FC902 /* boss.c3b in Resources */,
-				AC1904E0198B87E100A2307E /* pkstart.png in Resources */,
 				AB2EA97B196BF8F2005FC902 /* bossCannon.c3b in Resources */,
 				AB2EA97C196BF8F2005FC902 /* coconut.c3b in Resources */,
 				AB2EA97D196BF8F2005FC902 /* daodanv001.c3b in Resources */,

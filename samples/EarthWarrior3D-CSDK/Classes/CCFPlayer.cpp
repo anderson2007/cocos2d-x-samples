@@ -157,11 +157,11 @@ bool CCFPlayer::hurt(float damage){
                                                               CC_CALLBACK_0(CCFPlayer::hideWarningLayer, this, warningLayer)
                                                               ),NULL));
     
-    auto hpView = ((HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
-    
-    auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
-    hpView->runAction(to);
-    
+//    auto hpView = ((HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
+//    
+//    auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
+//    hpView->runAction(to);
+//    
     if(_HP <= 0  && _alive)
     {
         die();

@@ -259,8 +259,10 @@ void EnemyController::erase(int i)
 }
 
 
-void GameController::update(float dt, Player* player)
+void GameController::update(float dt, AirCraft* player)
 {
+    if(player == NULL) return;
+    
     Vec2 temp;
     Bullet* b;
     auto list =BulletController::bullets;
