@@ -1,6 +1,32 @@
 LOCAL_PATH := $(call my-dir)
 
+CCF_PATH := intel_ccf
 include $(CLEAR_VARS)
+LOCAL_MODULE := AFE
+LOCAL_SRC_FILES := $(CCF_PATH)/$(TARGET_ARCH_ABI)/libAFE.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := STC
+LOCAL_SRC_FILES := $(CCF_PATH)/$(TARGET_ARCH_ABI)/libSTC.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := stcapi
+LOCAL_SRC_FILES := $(CCF_PATH)/$(TARGET_ARCH_ABI)/libstcapi.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := stcjnimediator
+LOCAL_SRC_FILES := $(CCF_PATH)/$(TARGET_ARCH_ABI)/libstcjnimediator.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SHARED_LIBRARIES += AFE
+LOCAL_SHARED_LIBRARIES += STC
+LOCAL_SHARED_LIBRARIES += stcapi
+LOCAL_SHARED_LIBRARIES += stcjnimediator
 
 LOCAL_MODULE := cocos2dcpp_shared
 
