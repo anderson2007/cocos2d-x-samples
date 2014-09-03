@@ -347,10 +347,14 @@ void GameLayer::scheduleReceiveMessage(float dt)
         doc.Parse<rapidjson::kParseDefaultFlags>(msg.c_str());
         if(doc.HasParseError() != 0) continue;
         
-        switch (doc["type"].GetInt()) {
-            case 4:
-                _friendPlayer->touchMoved(Point(doc["prevX"].GetDouble(), doc["prevY"].GetDouble()), Point(doc["deltaX"].GetDouble(), doc["deltaY"].GetDouble()));
-                break;
+//        if (doc.HasMember("type") && doc.HasMember("prevX") && doc.HasMember("prevY") && doc.HasMember("deltaX") && doc.HasMember("deltaY")
+//            && doc["type"].IsInt() && doc["prevX"].IsNumber() && doc["prevY"].IsNumber() && doc["deltaX"].IsNumber() && doc["deltaY"].IsNumber())
+        {
+            switch (doc["type"].GetInt()) {
+                case 4:
+                    _friendPlayer->touchMoved(Point(doc["prevX"].GetDouble(), doc["prevY"].GetDouble()), Point(doc["deltaX"].GetDouble(), doc["deltaY"].GetDouble()));
+                    break;
+            }
         }
     }
 }

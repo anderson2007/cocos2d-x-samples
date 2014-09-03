@@ -625,7 +625,6 @@ JNIEXPORT jlong JNICALL Java_com_intel_csdk_wrapper_JNIMediator_nativeSendMsg
 		__android_log_write(ANDROID_LOG_ERROR, CSDK_TAG, logdata.str().c_str());
 		return sent ;
 	}
-	messageChat = "";
 	logdata << "[Nativechat]  Message Send : "<< messageChat;
 	__android_log_write(ANDROID_LOG_ERROR, CSDK_TAG, logdata.str().c_str());
 	(env)->ReleaseStringUTFChars(chattext, strMessage);

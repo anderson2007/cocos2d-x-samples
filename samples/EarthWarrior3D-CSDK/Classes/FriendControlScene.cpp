@@ -139,6 +139,7 @@ bool FriendControl::onTouchBegan(Touch *touch, Event *event)
     return true;
 }
 
+long g_serialNo = 1;
 void FriendControl::onTouchMoved(Touch *touch, Event *event)
 {
     Point prev = _friendPlayer->getPosition();
@@ -149,10 +150,11 @@ void FriendControl::onTouchMoved(Touch *touch, Event *event)
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo t;
-    
+
+    std::string strMessage = StringUtils::format("{serialNo:%ld, \"type\":4, \"prevX\":%.2f, \"prevY\":%.2f, \"deltaX\":%.2f, \"deltaY\":%.2f}", g_serialNo++, prev.x, prev.y, delta.x, delta.y);
     if (JniHelper::getStaticMethodInfo(t, CCF_ACTIVITY_CLASSNAME, "friendControl", "(Ljava/lang/String;)V")) {
-        jstring stringArg1 = t.env->NewStringUTF(StringUtils::format("{\"type\":4, \"prevX\":%f, \"prevX\":%f, \"deltaX\":%f, \"deltaY\":%f}", prev.x, prev.y, delta.x, delta.y).c_str());
-        
+        jstring stringArg1 = t.env->NewStringUTF(strMessage.c_str());
+        CCLOG("Doc. %s", strMessage.c_str());
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
         t.env->DeleteLocalRef(t.classID);
         t.env->DeleteLocalRef(stringArg1);
