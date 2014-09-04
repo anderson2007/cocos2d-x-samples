@@ -93,8 +93,6 @@ void CCFPlayer::touchMoved(Point prev, Point delta)
 {
     if(!ConnectionInterface::IsPlayGame()) return;
     
-    CCLOG("CCFPlayer::touchMoved");
-    
     Point _prev = getPosition();
     
     Point shiftPosition = delta+_prev;

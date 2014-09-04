@@ -100,7 +100,6 @@ void ConnectionInterface::SendMessage(std::string msg)
 
 void ConnectionInterface::OnReceiveMessage(std::string message)
 {
-    CCLOG("OnReceiveMessage %s", message.c_str());
     if(message.length() == 0) return;
         
     _mutexMessage.lock();
