@@ -1,9 +1,11 @@
-EarthWarrior3D
+<img src="http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png" width=200>
+
+EarthWarrior3D with Intel CCF
 ======
 
 This is an experimental project from Cocos2d-x, featuring 3D models in a 2d game.
 
-Using Cocos2d-x 3.0 and the experimental Sprite3D.
+Using Cocos2d-x 3.2 and `Intel® Common Connectivity Framework SDK 3.0 for Android.`
 
 The code of this project, Cocos2d-x, Sprite3D are all licensed under MIT
 
@@ -11,39 +13,50 @@ Musics are copyrighted by [Matthew Pablo](http://www.matthewpablo.com/), and lic
 
 You may not use any art including 2d and 3d from this project for commercial purpose
 
-
-###Sprite3D
-
-
-The Sprite3D code featured in this project can currently load static OBJ model.
-
-to load a model:
-```c++
-auto model = Sprite3D::create("3dmodel.obj", "texture.png");
-```
-
-###Toon Shading
-
-There is no lighting in Cocos2d-x yet. But
-To compliment that, we added built-in support for toon-shader, specifically, toon outline:
-```c++
-auto model = Sprite3D::create("3dmodel.obj", "texture.png");
-model->setOutline(1.5, Color3B(0,0,0)); // set the outline to be 1.5 point wide, and black
-```
+How to get the code
+-----------------------
+1. Download `Cocos Studio` from here [Windows][1] \ [Mac][2]
+2. Run Cocos Studio
+3. Click New Project
+4. Check the box of Generate Cocos2d-x Project
+5. Click Browse button on the right of the Engine path and Click Open as cocos2d-x3.2 path is selected
+6. Check the box of INTEL@COMMON CONNECTIVITY FRAMEWORK
+7. Click Create
+8. Now the code is here `NewCocosProject1/ccfSample`
 
 
-###3D API
+How to start a new game
+-----------------------
 
-3D API are available since Cocos2d-x 3.0 for all Nodes
+1. Download the code from [cocos2d download site][3]
+2. Run `setup.py`
+3. Run the `cocos` script
 
-```c++
-node->setPosition3D(Vertex3F(x,y,z));
-Vertex3F pos = node->getPosition3D();
+Example:
 
-node->setRotation3D(Vertex3F(x,y,z));
-Vertex3F rot = node->getRotation3D(); //2d rotation is the same as rotating in z axis
-```
-3D API are also ported to some actions as well
-```c++
-node->runAction(RotateBy::create(Vertex3F(x,y,z)));
-```
+    $ cd cocos2d-x
+    $ ./setup.py
+    $ source FILE_TO_SAVE_SYSTEM_VARIABLE
+    $ cd /NewCocosProject1/ccfSample/EarthWarrior3D-CSDK/proj.android
+    $ cocos run -p android -j 4
+    
+Build Requirements
+------------------
+
+* Mac OS X 10.7+, Xcode 4.6+
+* or Windows 7+, VS 2012+
+* Python 2.7.5
+
+
+Runtime Requirements
+--------------------
+  * iOS 5.0+ for iPhone / iPad games
+  * Android 2.3+ for Android games
+  * OS X v10.6+ for Mac games
+  * Windows 7+ for Win games
+
+
+[1]: http://pan.baidu.com/s/1o67HOCE "Cocos Studio For Win"
+[2]: http://pan.baidu.com/s/1hqGH6Kk "Cocos Studio For Mac"
+[3]: http://www.cocos2d-x.org/download/version#Cocos2d-x
+
